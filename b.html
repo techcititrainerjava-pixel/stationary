@@ -1,0 +1,575 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaperNest - Stationery Store</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fffaf5;
+            color: #333;
+        }
+
+        /* Navbar */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+
+        .logo span {
+            color: #f97316;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7c3aed;
+        }
+
+        .cart {
+            background: #7c3aed;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #27213c;
+        }
+
+        .hero-content h1 span {
+            color: #7c3aed;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 550px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #7c3aed;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #5b21b6;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            flex: 1;
+            background: #ede9fe;
+            min-height: 350px;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 130px;
+            box-shadow: 10px 10px 0 #ddd6fe;
+        }
+
+        /* Categories */
+        .section {
+            padding: 70px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: #27213c;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        .categories {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-7px);
+        }
+
+        .category .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .category h3 {
+            margin-bottom: 8px;
+        }
+
+        .category p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Products */
+        .products {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-7px);
+        }
+
+        .product-image {
+            height: 190px;
+            background: #f3f0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 80px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: #7c3aed;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Banner */
+        .banner {
+            max-width: 1100px;
+            margin: 20px auto 70px;
+            padding: 50px;
+            background: #7c3aed;
+            color: white;
+            border-radius: 25px;
+            text-align: center;
+        }
+
+        .banner h2 {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .banner p {
+            margin-bottom: 25px;
+        }
+
+        .banner .btn {
+            background: white;
+            color: #7c3aed;
+        }
+
+        /* Footer */
+        footer {
+            background: #27213c;
+            color: white;
+            padding: 45px 25px 20px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        footer h3 {
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #c8c5d1;
+            line-height: 1.7;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #c8c5d1;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #454052;
+            margin-top: 35px;
+            padding-top: 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+
+            .hero-content h1 {
+                font-size: 43px;
+            }
+
+            .categories,
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .cart {
+                padding: 8px 14px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 50px;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image {
+                width: 100%;
+                min-height: 250px;
+                font-size: 90px;
+            }
+
+            .categories,
+            .products {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .banner {
+                margin: 10px 20px 50px;
+                padding: 35px 20px;
+            }
+
+            .banner h2 {
+                font-size: 28px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <div class="logo">Paper<span>Nest</span></div>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <a href="#" class="cart">🛒 Cart</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+            <h1>Make Your Ideas <span>Beautiful.</span></h1>
+
+            <p>
+                Discover premium notebooks, pens, planners and creative
+                stationery designed to make your everyday work more colorful
+                and productive.
+            </p>
+
+            <a href="#products" class="btn">Shop Now →</a>
+        </div>
+
+        <div class="hero-image">
+            📚✏️🖊️
+        </div>
+
+    </section>
+
+    <!-- Categories -->
+    <section class="section" id="categories">
+
+        <div class="section-title">
+            <h2>Shop By Category</h2>
+            <p>Everything you need to organize your ideas.</p>
+        </div>
+
+        <div class="categories">
+
+            <div class="category">
+                <div class="icon">📓</div>
+                <h3>Notebooks</h3>
+                <p>Premium notebooks for your thoughts.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">🖊️</div>
+                <h3>Pens</h3>
+                <p>Smooth and stylish writing tools.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">📅</div>
+                <h3>Planners</h3>
+                <p>Plan your days and reach your goals.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">🎨</div>
+                <h3>Art Supplies</h3>
+                <p>Bring your creative ideas to life.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Products -->
+    <section class="section" id="products">
+
+        <div class="section-title">
+            <h2>Popular Products</h2>
+            <p>Our best-selling stationery essentials.</p>
+        </div>
+
+        <div class="products">
+
+            <div class="product">
+                <div class="product-image">📔</div>
+                <div class="product-info">
+                    <h3>Classic Notebook</h3>
+                    <p>Hardcover dotted notebook</p>
+                    <div class="price">₹299</div>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-image">🖊️</div>
+                <div class="product-info">
+                    <h3>Premium Pen Set</h3>
+                    <p>Set of 5 smooth gel pens</p>
+                    <div class="price">₹199</div>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-image">📒</div>
+                <div class="product-info">
+                    <h3>Daily Planner</h3>
+                    <p>Organize your daily schedule</p>
+                    <div class="price">₹349</div>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-image">🖍️</div>
+                <div class="product-info">
+                    <h3>Color Kit</h3>
+                    <p>24 vibrant coloring pencils</p>
+                    <div class="price">₹399</div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Promotional Banner -->
+    <section class="banner">
+        <h2>Stationery That Inspires You ✨</h2>
+        <p>Get 20% off your first order and start creating today.</p>
+        <a href="#" class="btn">Explore Collection</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+
+        <div class="footer-content">
+
+            <div>
+                <h3>PaperNest</h3>
+                <p>
+                    Your little corner for beautiful stationery,
+                    creative supplies and everyday essentials.
+                </p>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#products">Products</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Contact</h3>
+                <ul>
+                    <li>📧 hello@papernest.com</li>
+                    <li>📞 +91 98765 43210</li>
+                    <li>📍 Bengaluru, India</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 PaperNest. All Rights Reserved.
+        </div>
+
+    </footer>
+
+</body>
+</html>
+```
